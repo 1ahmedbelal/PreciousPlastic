@@ -90,6 +90,14 @@
     #user-info {
       margin-top: 20px;
     }
+    #private-content {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      background-color: #f5f5f5;
+      margin: 20px;
+      border-radius: 8px;
+    }
   </style>
 </head>
 <body>
@@ -135,6 +143,15 @@
     <button onclick="signOut()" class="button">Sign Out</button>
     <div id="user-info"></div>
   </div>
+  <div id="private-content">
+    <h3>Member Dashboard</h3>
+    <p>Welcome to the internal hub. Submit logs, view instructions, and manage data here soon.</p>
+    <ul>
+      <li><a href="#">Submit Daily Log (coming soon)</a></li>
+      <li><a href="#">View Instructions (coming soon)</a></li>
+      <li><a href="#">Access Inventory Sheet (coming soon)</a></li>
+    </ul>
+  </div>
   <div class="footer">
     <p>
       <a href="https://instagram.com/Oxfordpreciousplastic">@Oxfordpreciousplastic</a> |
@@ -173,10 +190,13 @@
 
   auth.onAuthStateChanged(user => {
     const userInfo = document.getElementById("user-info");
+    const privateContent = document.getElementById("private-content");
     if (user) {
       userInfo.innerHTML = `<p>Welcome, ${user.displayName}</p>`;
+      privateContent.style.display = "block";
     } else {
       userInfo.innerHTML = "<p>Not logged in.</p>";
+      privateContent.style.display = "none";
     }
   });
 </script>
