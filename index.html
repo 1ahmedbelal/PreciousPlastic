@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Oxford High School Precious Plastic</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
   <style>
     body {
       font-family: 'Roboto', sans-serif;
@@ -72,6 +74,13 @@
       margin-top: 20px;
       text-decoration: none;
     }
+    #login-section {
+      text-align: center;
+      margin: 40px auto;
+    }
+    #user-info {
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -82,7 +91,7 @@
       <a href="#projects">Projects</a>
       <a href="#how">How It Works</a>
       <a href="#getinvolved">Get Involved</a>
-      <a href="#login" class="button">Member Login</a>
+      <a href="#login-section" class="button">Member Login</a>
     </nav>
   </header>
   <div class="hero">
@@ -110,11 +119,49 @@
       </div>
     </div>
   </div>
+  <div class="section" id="login-section">
+    <h2>Member Login</h2>
+    <button onclick="signIn()" class="button">Login with Google</button>
+    <button onclick="signOut()" class="button">Sign Out</button>
+    <div id="user-info"></div>
+  </div>
   <div class="footer">
     <p>
       <a href="https://instagram.com/Oxfordpreciousplastic">@Oxfordpreciousplastic</a> |
       <a href="mailto:ofrotopreciousplastic@gmail.com">ofrotopreciousplastic@gmail.com</a>
     </p>
   </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB3k7VKpe0bS4HMs7nidPsiZA9_BEzaZV0",
+      authDomain: "precious-plastic-e6586.firebaseapp.com",
+      projectId: "precious-plastic-e6586",
+      storageBucket: "precious-plastic-e6586.firebasestorage.app",
+      messagingSenderId: "816596846839",
+      appId: "1:816596846839:web:aa6fa29a920c9c9dce6bf2",
+      measurementId: "G-E4RD7C7JQK"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function signIn() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider);
+    }
+
+    function signOut() {
+      auth.signOut();
+    }
+
+    auth.onAuthStateChanged(user => {
+      const userInfo = document.getElementById("user-info");
+      if (user) {
+        userInfo.innerHTML = `<p>Welcome, ${user.displayName}</p>`;
+      } else {
+        userInfo.innerHTML = "<p>Not logged in.</p>";
+      }
+    });
+  </script>
 </body>
 </html>
