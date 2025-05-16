@@ -21,6 +21,11 @@
       padding: 20px;
       text-align: center;
     }
+    header img {
+      height: 40px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
     nav a {
       margin: 0 15px;
       color: #fff;
@@ -28,7 +33,7 @@
       font-weight: bold;
     }
     .hero {
-      background-image: url('https://images.unsplash.com/photo-1593113598565-cc25238e2c45');
+      background-image: url('images/hero.jpg');
       background-size: cover;
       background-position: center;
       padding: 100px 20px;
@@ -51,6 +56,10 @@
     .goal, .product {
       flex: 1 1 200px;
       margin: 10px;
+    }
+    .product img {
+      width: 200px;
+      border-radius: 10px;
     }
     .footer {
       background-color: #00264d;
@@ -85,7 +94,8 @@
 </head>
 <body>
   <header>
-    <h2>OXFORD HIGH SCHOOL PRECIOUS PLASTIC</h2>
+    <img src="images/logo.png" alt="Logo">
+    <span><h2 style="display: inline;">OXFORD HIGH SCHOOL PRECIOUS PLASTIC</h2></span>
     <nav>
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
@@ -110,11 +120,11 @@
     <h2>What We Make</h2>
     <div class="products">
       <div class="product">
-        <img src="https://i.imgur.com/IL8V1mU.png" alt="Bench" width="200">
+        <img src="images/bench.jpg" alt="Bench">
         <p>Benches</p>
       </div>
       <div class="product">
-        <img src="https://i.imgur.com/fqlrI5v.png" alt="Chair" width="150">
+        <img src="images/chair.jpg" alt="Chair">
         <p>Chair</p>
       </div>
     </div>
@@ -147,11 +157,11 @@
 
     function signIn() {
       const provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithPopup(provider);
+      auth.signInWithPopup(provider).catch(console.error);
     }
 
     function signOut() {
-      auth.signOut();
+      auth.signOut().catch(console.error);
     }
 
     auth.onAuthStateChanged(user => {
