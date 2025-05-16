@@ -142,42 +142,43 @@
     </p>
   </div>
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyB3k7VKpe0bS4HMs7nidPsiZA9_BEzaZV0",
-      authDomain: "precious-plastic-e6586.firebaseapp.com",
-      projectId: "precious-plastic-e6586",
-      storageBucket: "precious-plastic-e6586.firebasestorage.app",
-      messagingSenderId: "816596846839",
-      appId: "1:816596846839:web:aa6fa29a920c9c9dce6bf2",
-      measurementId: "G-E4RD7C7JQK"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+ <script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyB3k7VKpe0bS4HMs7nidPsiZA9_BEzaZV0",
+    authDomain: "precious-plastic-e6586.firebaseapp.com",
+    projectId: "precious-plastic-e6586",
+    storageBucket: "precious-plastic-e6586.firebasestorage.app",
+    messagingSenderId: "816596846839",
+    appId: "1:816596846839:web:aa6fa29a920c9c9dce6bf2",
+    measurementId: "G-E4RD7C7JQK"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
 
-    function signIn() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider)
-    .then(result => {
-      console.log("Logged in:", result.user);
-    })
-    .catch(error => {
-      console.error("Login failed:", error);
-      alert("Login failed: " + error.message);
-    });
-}
-    function signOut() {
-      auth.signOut().catch(console.error);
+  function signIn() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider)
+      .then(result => {
+        console.log("Logged in:", result.user);
+      })
+      .catch(error => {
+        console.error("Login failed:", error);
+        alert("Login failed: " + error.message);
+      });
+  }
+
+  function signOut() {
+    auth.signOut().catch(console.error);
+  }
+
+  auth.onAuthStateChanged(user => {
+    const userInfo = document.getElementById("user-info");
+    if (user) {
+      userInfo.innerHTML = `<p>Welcome, ${user.displayName}</p>`;
+    } else {
+      userInfo.innerHTML = "<p>Not logged in.</p>";
     }
-
-    auth.onAuthStateChanged(user => {
-      const userInfo = document.getElementById("user-info");
-      if (user) {
-        userInfo.innerHTML = `<p>Welcome, ${user.displayName}</p>`;
-      } else {
-        userInfo.innerHTML = "<p>Not logged in.</p>";
-      }
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
