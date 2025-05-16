@@ -156,10 +156,16 @@
     const auth = firebase.auth();
 
     function signIn() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      auth.signInWithPopup(provider).catch(console.error);
-    }
-
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider)
+    .then(result => {
+      console.log("Logged in:", result.user);
+    })
+    .catch(error => {
+      console.error("Login failed:", error);
+      alert("Login failed: " + error.message);
+    });
+}
     function signOut() {
       auth.signOut().catch(console.error);
     }
